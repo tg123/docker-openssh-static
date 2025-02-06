@@ -1,5 +1,5 @@
 FROM alpine:3.16.0 AS builder
-ARG openssh_url=https://github.com/openssh/openssh-portable/archive/refs/tags/V_9_0_P1.tar.gz
+ARG openssh_url
 RUN \
   apk add --no-cache \
     autoconf \
@@ -13,8 +13,8 @@ RUN \
     openssl-libs-static \
     patch \
     zlib-dev \
-    zlib-static \
-    && \
+    zlib-static
+RUN \
   cd /tmp && \
   curl -fsSL "${openssh_url}" | tar xz --strip-components=1 && \
   autoreconf && \
